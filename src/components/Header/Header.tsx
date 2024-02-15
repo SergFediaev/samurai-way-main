@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../logo.jpg'
+import logo from '../../logo.jpg'
 import classes from './Header.module.css'
 
 export const Header = () => <header className={classes.header}>

@@ -1,10 +1,10 @@
-import React from 'react';
+import React from 'react'
 import './App.css'
-import {Header} from "./components/Header";
-import {NavBar} from "./components/NavBar";
-import {Profile} from "./components/Profile";
+import {Header} from './components/Header/Header'
+import {NavBar} from './components/NavBar/NavBar'
+import {Profile} from './components/Profile/Profile'
 
-export const App = () => <div className='app-wrapper'>
+export const App = () => <div className="app-wrapper">
     <Header/>
     <NavBar/>
     <Profile/>
