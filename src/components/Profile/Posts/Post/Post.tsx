@@ -1,7 +1,8 @@
 import React from 'react'
 import classes from './Post.module.css'
 
-type PostPropsType = {
+export type PostPropsType = {
+    id: number
     message: string
     likesCount: number
 }
