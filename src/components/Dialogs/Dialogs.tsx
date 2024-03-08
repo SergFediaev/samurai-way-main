@@ -13,59 +13,18 @@ export type MessageType = {
     message: string
 }
 
-export const Dialogs = (props: any) => {
+type DialogsPropsType = {
+    dialogs: DialogType[]
+    messages: MessageType[]
+}
 
-    let dialogs: DialogType[] = [
-        {
-            id: 1,
-            name: 'Dimych',
-        },
-        {
-            id: 2,
-            name: 'Andrew',
-        },
-        {
-            id: 3,
-            name: 'Sveta',
-        },
-        {
-            id: 4,
-            name: 'Sasha',
-        },
-        {
-            id: 5,
-            name: 'Valera',
-        },
-        {
-            id: 6,
-            name: 'Viktor',
-        },
-    ]
+export const Dialogs = ({
+                            dialogs,
+                            messages,
+                        }: DialogsPropsType) => {
+    const dialogsElements = dialogs.map(dialog => <DialogItem id={dialog.id} name={dialog.name}/>)
 
-    let dialogsElements = dialogs.map(dialog => <DialogItem id={dialog.id} name={dialog.name}/>)
-
-    let messages: MessageType[] = [
-        {
-            id: 1, message: 'Hi',
-        },
-        {
-            id: 2, message: 'How is your it kamasutra',
-        },
-        {
-            id: 3, message: 'Yo',
-        },
-        {
-            id: 4, message: 'Yo',
-        },
-        {
-            id: 5, message: 'Yo',
-        },
-        {
-            id: 6, message: 'Yo',
-        },
-    ]
-
-    let messagesElements = messages.map(message => <Message message={message.message}/>)
+    const messagesElements = messages.map(message => <Message message={message.message}/>)
 
     return (
         <div className={classes.dialogs}>
