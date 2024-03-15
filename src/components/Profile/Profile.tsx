@@ -3,13 +3,13 @@ import {Posts, PostsType} from './Posts/Posts'
 import {ProfileInfo} from './ProfileInfo/ProfileInfo'
 
 type ProfilePropsType = {
-    posts: PostsType
+    state: { posts: PostsType }
 }
 
-export const Profile = ({posts}: ProfilePropsType) => {
+export const Profile = ({state}: ProfilePropsType) => {
 
     return <div>
         <ProfileInfo/>
-        <Posts posts={posts}/>
+        <Posts posts={state.posts}/>
     </div>
 }

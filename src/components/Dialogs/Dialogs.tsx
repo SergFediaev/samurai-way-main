@@ -14,17 +14,16 @@ export type MessageType = {
 }
 
 type DialogsPropsType = {
-    dialogs: DialogType[]
-    messages: MessageType[]
+    state: {
+        dialogs: DialogType[]
+        messages: MessageType[]
+    }
 }
 
-export const Dialogs = ({
-                            dialogs,
-                            messages,
-                        }: DialogsPropsType) => {
-    const dialogsElements = dialogs.map(dialog => <DialogItem id={dialog.id} name={dialog.name}/>)
+export const Dialogs = ({state}: DialogsPropsType) => {
+    const dialogsElements = state.dialogs.map(dialog => <DialogItem id={dialog.id} name={dialog.name}/>)
 
-    const messagesElements = messages.map(message => <Message message={message.message}/>)
+    const messagesElements = state.messages.map(message => <Message message={message.message}/>)
 
     return (
         <div className={classes.dialogs}>
