@@ -25,10 +25,16 @@ export const Dialogs = ({state}: DialogsPropsType) => {
 
     const messagesElements = state.messages.map(message => <Message message={message.message}/>)
 
-    return (
+    const messageRef = React.createRef<HTMLTextAreaElement>()
+
+    const sendMessage = () => alert(messageRef.current?.value)
+
+    return <>
         <div className={classes.dialogs}>
             <div className={classes.dialogsItems}>{dialogsElements}</div>
             <div className={classes.messages}>{messagesElements}</div>
         </div>
-    )
+        <textarea ref={messageRef}/>
+        <button onClick={sendMessage}>Send message</button>
+    </>
 }
