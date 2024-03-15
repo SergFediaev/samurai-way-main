@@ -6,14 +6,15 @@ export type PostsType = PostPropsType[]
 
 export type PostsPropsType = {
     posts: PostsType
+    addPost: (newMessage: string) => void
 }
 
-export const Posts = ({posts}: PostsPropsType) => {
+export const Posts = ({posts, addPost}: PostsPropsType) => {
     const postsElements = posts.map(post => <Post id={post.id} message={post.message} likesCount={post.likesCount}/>)
 
     const addPosts = () => {
         const text = newPostElement.current?.value
-        alert(text)
+        if (text) addPost(text)
     }
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
