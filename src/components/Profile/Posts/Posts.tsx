@@ -13,8 +13,10 @@ export const Posts = ({posts, addPost}: PostsPropsType) => {
     const postsElements = posts.map(post => <Post id={post.id} message={post.message} likesCount={post.likesCount}/>)
 
     const addPosts = () => {
-        const text = newPostElement.current?.value
-        if (text) addPost(text)
+        if (newPostElement.current?.value) {
+            addPost(newPostElement.current.value)
+            newPostElement.current.value = ''
+        }
     }
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
