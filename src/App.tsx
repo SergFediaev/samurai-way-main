@@ -2,7 +2,7 @@ import React from 'react'
 import './App.css'
 import {Header} from './components/Header/Header'
 import {NavBar} from './components/NavBar/NavBar'
-import {Dialogs} from './components/Dialogs/Dialogs'
+import {Dialogs, MessageType} from './components/Dialogs/Dialogs'
 import {Route} from 'react-router-dom'
 import {Profile} from './components/Profile/Profile'
 import {New} from './components/New/New'
@@ -16,19 +16,25 @@ import {StateType} from './redux/state'
 
 type AppPropsType = {
     state: StateType
-    addPost: (newMessage: string) => void
+    addPost: () => void
+    updateNewPostText: (newPostText: string) => void
+    addMessage: (message: MessageType) => void
 }
 
-export const App = ({state, addPost}: AppPropsType) => {
+export const App = ({state, addPost, updateNewPostText, addMessage}: AppPropsType) => {
     return <div className="app-wrapper">
         <Header/>
         <NavBar state={state.sidebar}/>
         <div className="app-wrapper-content">
             <Route path="/profile" render={() => <Profile
-                state={state.profilePage}
+                profilePage={state.profilePage}
                 addPost={addPost}
+                updateNewPostText={updateNewPostText}
             />}/>
-            <Route path="/dialogs" render={() => <Dialogs state={state.dialogsPage}/>}/>
+            <Route path="/dialogs" render={() => <Dialogs
+                state={state.dialogsPage}
+                addMessage={addMessage}
+            />}/>
             <Route path="/new" component={New}/>
             <Route path="/music" component={Music}/>
             <Route path="/settings" component={Settings}/>

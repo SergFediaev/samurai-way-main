@@ -3,9 +3,7 @@ import {DialogType, MessageType} from '../components/Dialogs/Dialogs'
 import {rerenderEntireTree} from '../render'
 
 export type StateType = {
-    profilePage: {
-        posts: PostPropsType[]
-    }
+    profilePage: ProfilePageType
     dialogsPage: {
         messages: MessageType[]
         dialogs: DialogType[]
@@ -13,6 +11,11 @@ export type StateType = {
     sidebar: {
         friends: FriendType[]
     }
+}
+
+export type ProfilePageType = {
+    posts: PostPropsType[]
+    newPostText: string
 }
 
 export type FriendType = {
@@ -36,6 +39,7 @@ export const state: StateType = {
                 id: 4, message: 'Da.', likesCount: 0,
             },
         ],
+        newPostText: 'it-kamasutra.com',
     },
     dialogsPage: {
         dialogs: [
@@ -94,13 +98,26 @@ export const state: StateType = {
     },
 }
 
-export const addPost = (postMessage: string) => {
+export const addPost = () => {
     const newPost: PostPropsType = {
         id: ++state.profilePage.posts.length,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: 0,
     }
 
     state.profilePage.posts.push(newPost)
+    state.profilePage.newPostText = ''
     rerenderEntireTree(state)
 }
+
+export const updateNewPostText = (newText: string) => {
+    state.profilePage.newPostText = newText
+    rerenderEntireTree(state)
+}
+
+export const addMessage = (message: MessageType) => {
+    state.dialogsPage.messages.push(message)
+    rerenderEntireTree(state)
+}
+
+// window.state = state

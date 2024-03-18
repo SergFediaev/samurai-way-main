@@ -18,16 +18,22 @@ type DialogsPropsType = {
         dialogs: DialogType[]
         messages: MessageType[]
     }
+    addMessage: (message: MessageType) => void
 }
 
-export const Dialogs = ({state}: DialogsPropsType) => {
+export const Dialogs = ({state, addMessage}: DialogsPropsType) => {
     const dialogsElements = state.dialogs.map(dialog => <DialogItem id={dialog.id} name={dialog.name}/>)
 
     const messagesElements = state.messages.map(message => <Message message={message.message}/>)
 
     const messageRef = React.createRef<HTMLTextAreaElement>()
 
-    const sendMessage = () => alert(messageRef.current?.value)
+    const sendMessage = () => {
+        if (messageRef.current?.value) addMessage({
+            id: ++state.messages.length,
+            message: messageRef.current.value,
+        } as MessageType)
+    }
 
     return <>
         <div className={classes.dialogs}>

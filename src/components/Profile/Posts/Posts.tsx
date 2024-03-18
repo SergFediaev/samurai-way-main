@@ -6,24 +6,27 @@ export type PostsType = PostPropsType[]
 
 export type PostsPropsType = {
     posts: PostsType
-    addPost: (newMessage: string) => void
+    addPost: () => void
+    newPostText: string
+    updateNewPostText: (newPostText: string) => void
 }
 
-export const Posts = ({posts, addPost}: PostsPropsType) => {
+export const Posts = ({posts, addPost, newPostText, updateNewPostText}: PostsPropsType) => {
     const postsElements = posts.map(post => <Post id={post.id} message={post.message} likesCount={post.likesCount}/>)
 
     const addPosts = () => {
-        if (newPostElement.current?.value) {
-            addPost(newPostElement.current.value)
-            newPostElement.current.value = ''
-        }
+        addPost()
+    }
+
+    const onPostChange = () => {
+        if (newPostElement.current?.value) updateNewPostText(newPostElement.current?.value)
     }
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
     return <div className={classes.postsBlock}><h3>My posts</h3>
         <div>
-            <div><textarea ref={newPostElement}></textarea></div>
+            <div><textarea ref={newPostElement} value={newPostText} onChange={onPostChange}/></div>
             <div>
                 <button>Remove</button>
                 <button onClick={addPosts}>Add post</button>
