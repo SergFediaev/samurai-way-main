@@ -17,3 +17,17 @@ export const rerenderEntireTree = (state: StateType) => ReactDOM.render(<Browser
 rerenderEntireTree(state)
 
 subscribe(rerenderEntireTree)
+
+let page = {
+    _content: '',
+    title: '',
+    setContent(content: string) {
+        this._content = content
+    },
+    getContent() {
+        return this._content
+    },
+    render: function () {
+        document.write(this._content)
+    },
+}
