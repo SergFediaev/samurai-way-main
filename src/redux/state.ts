@@ -1,6 +1,9 @@
 import {PostPropsType} from '../components/Profile/Posts/Post/Post'
 import {DialogType, MessageType} from '../components/Dialogs/Dialogs'
-import {rerenderEntireTree} from '../render'
+
+let rerenderEntireTree = (state: StateType) => {
+    console.log('State was changed!')
+}
 
 export type StateType = {
     profilePage: ProfilePageType
@@ -118,6 +121,10 @@ export const updateNewPostText = (newText: string) => {
 export const addMessage = (message: MessageType) => {
     state.dialogsPage.messages.push(message)
     rerenderEntireTree(state)
+}
+
+export const subscribe = (observer: (state: StateType) => void) => {
+    rerenderEntireTree = observer
 }
 
 // window.state = state
