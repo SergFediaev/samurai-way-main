@@ -1,4 +1,4 @@
-import {addMessage, addPost, state, StateType, subscribe, updateNewPostText} from './redux/state'
+import {StateType, store} from './redux/state'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
@@ -8,15 +8,15 @@ import {BrowserRouter} from 'react-router-dom'
 export const rerenderEntireTree = (state: StateType) => ReactDOM.render(<BrowserRouter>
     <App
         state={state}
-        addPost={addPost}
-        updateNewPostText={updateNewPostText}
-        addMessage={addMessage}
+        addPost={store.addPost.bind(store)}
+        updateNewPostText={store.updateNewPostText.bind(store)}
+        addMessage={store.addMessage.bind(store)}
     />
 </BrowserRouter>, document.getElementById('customRoot'))
 
-rerenderEntireTree(state)
+rerenderEntireTree(store.getState())
 
-subscribe(rerenderEntireTree)
+store.subscribe(rerenderEntireTree)
 
 let page = {
     _content: '',
