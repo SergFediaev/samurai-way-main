@@ -22,7 +22,17 @@ export type FriendType = {
     name: string
 }
 
-export const store = {
+export type StoreType = {
+    _state: StateType
+    getState: () => StateType
+    _callSubscriber: (state: StateType) => void
+    addPost: () => void
+    updateNewPostText: (newText: string) => void
+    addMessage: (message: MessageType) => void
+    subscribe: (observer: (state: StateType) => void) => void
+}
+
+export const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
