@@ -35,6 +35,10 @@ export type ActionType = {
     text: string
 }
 
+const ADD_POST = 'ADD-POST'
+
+const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+
 export const store: StoreType = {
     _state: {
         profilePage: {
@@ -144,5 +148,14 @@ export const store: StoreType = {
         }
     },
 }
+
+export const addPostActionCreator = (): ActionType => ({
+    type: ADD_POST,
+} as ActionType)
+
+export const updateNewPostTextActionCreator = (text: string): ActionType => ({
+    type: UPDATE_NEW_POST_TEXT,
+    text,
+} as ActionType)
 
 // window.state = state
