@@ -26,10 +26,13 @@ export type StoreType = {
     _state: StateType
     getState: () => StateType
     _callSubscriber: (state: StateType) => void
-    addPost: () => void
-    updateNewPostText: (newText: string) => void
-    addMessage: (message: MessageType) => void
     subscribe: (observer: (state: StateType) => void) => void
+    dispatch: (action: ActionType) => void
+}
+
+export type ActionType = {
+    type: string
+    text: string
 }
 
 export const store: StoreType = {
@@ -107,33 +110,38 @@ export const store: StoreType = {
             ],
         },
     } as StateType,
-    getState() {
-        return this._state
-    },
     _callSubscriber(state: StateType) {
         console.log('State was changed!')
     },
-    addPost() {
-        const newPost: PostPropsType = {
-            id: ++this._state.profilePage.posts.length,
-            message: this._state.profilePage.newPostText,
-            likesCount: 0,
-        }
-
-        this._state.profilePage.posts.push(newPost)
-        this._state.profilePage.newPostText = ''
-        this._callSubscriber(this._state)
-    },
-    updateNewPostText(newText: string) {
-        this._state.profilePage.newPostText = newText
-        this._callSubscriber(this._state)
-    },
-    addMessage(message: MessageType) {
-        this._state.dialogsPage.messages.push(message)
-        this._callSubscriber(this._state)
+    getState() {
+        return this._state
     },
     subscribe(observer: (state: StateType) => void) {
         this._callSubscriber = observer
+    },
+    dispatch(action: ActionType) {
+        if (action.type === 'ADD-POST') {
+            const newPost: PostPropsType = {
+                id: ++this._state.profilePage.posts.length,
+                message: this._state.profilePage.newPostText,
+                likesCount: 0,
+            }
+
+            this._state.profilePage.posts.push(newPost)
+            this._state.profilePage.newPostText = ''
+            this._callSubscriber(this._state)
+        } else if (action.type === 'UPDATE-NEW-POST-TEXT') {
+            this._state.profilePage.newPostText = action.text
+            this._callSubscriber(this._state)
+        } else if (action.type === 'ADD-MESSAGE') {
+            const newMessage: MessageType = {
+                id: ++this._state.dialogsPage.messages.length,
+                message: action.text,
+            }
+
+            this._state.dialogsPage.messages.push(newMessage)
+            this._callSubscriber(this._state)
+        }
     },
 }
 

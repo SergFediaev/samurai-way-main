@@ -1,26 +1,25 @@
 import React from 'react'
 import classes from './Posts.module.css'
 import {Post, PostPropsType} from './Post/Post'
+import {ActionType} from '../../../redux/state'
 
 export type PostsType = PostPropsType[]
 
 export type PostsPropsType = {
     posts: PostsType
-    addPost: () => void
     newPostText: string
-    updateNewPostText: (newPostText: string) => void
+    dispatch: (action: ActionType) => void
 }
 
-export const Posts = ({posts, addPost, newPostText, updateNewPostText}: PostsPropsType) => {
+export const Posts = ({posts, newPostText, dispatch}: PostsPropsType) => {
     const postsElements = posts.map(post => <Post id={post.id} message={post.message} likesCount={post.likesCount}/>)
 
-    const addPosts = () => {
-        addPost()
-    }
+    const addPosts = () => dispatch({type: 'ADD-POST'} as ActionType)
 
-    const onPostChange = () => {
-        if (newPostElement.current?.value) updateNewPostText(newPostElement.current?.value)
-    }
+    const onPostChange = () => dispatch({
+        type: 'UPDATE-NEW-POST-TEXT',
+        text: newPostElement.current?.value,
+    } as ActionType)
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()
 
