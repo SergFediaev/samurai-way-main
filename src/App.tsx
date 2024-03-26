@@ -11,7 +11,6 @@ import {Settings} from './components/Settings/Settings'
 import {ActionType, StateType, StoreType} from './redux/state'
 
 // const ProfileComponent = () => <Profile/>
-
 // const DialogsComponent = () => <Dialogs/>
 
 type AppPropsType = {
@@ -23,7 +22,7 @@ type AppPropsType = {
 export const App = ({state, dispatch, store}: AppPropsType) => {
     return <div className="app-wrapper">
         <Header/>
-        <NavBar state={state.sidebar}/>
+        <NavBar sidebar={state.sidebar}/>
         <div className="app-wrapper-content">
             <Route path="/profile" render={() => <Profile
                 profilePage={state.profilePage}
