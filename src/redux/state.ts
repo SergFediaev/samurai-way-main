@@ -6,6 +6,7 @@ export type StateType = {
     dialogsPage: {
         messages: MessageType[]
         dialogs: DialogType[]
+        newMessageText: string
     }
     sidebar: {
         friends: FriendType[]
@@ -36,8 +37,9 @@ export type ActionType = {
 }
 
 const ADD_POST = 'ADD-POST'
-
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT'
+const SEND_MESSAGE = 'SEND_MESSAGE'
 
 export const store: StoreType = {
     _state: {
@@ -105,6 +107,7 @@ export const store: StoreType = {
                     id: 6, message: 'Yo',
                 },
             ],
+            newMessageText: '',
         },
         sidebar: {
             friends: [
@@ -142,8 +145,18 @@ export const store: StoreType = {
                 id: ++this._state.dialogsPage.messages.length,
                 message: action.text,
             }
-
             this._state.dialogsPage.messages.push(newMessage)
+            this._callSubscriber(this._state)
+        } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
+            this._state.dialogsPage.newMessageText = action.text
+            this._callSubscriber(this._state)
+        } else if (action.type === SEND_MESSAGE) {
+            const text = this._state.dialogsPage.newMessageText
+            this._state.dialogsPage.newMessageText = ''
+            this._state.dialogsPage.messages.push({
+                id: ++this._state.dialogsPage.messages.length,
+                message: text,
+            } as MessageType)
             this._callSubscriber(this._state)
         }
     },
@@ -155,6 +168,15 @@ export const addPostActionCreator = (): ActionType => ({
 
 export const updateNewPostTextActionCreator = (text: string): ActionType => ({
     type: UPDATE_NEW_POST_TEXT,
+    text,
+} as ActionType)
+
+export const sendMessageCreator = (): ActionType => ({
+    type: SEND_MESSAGE,
+} as ActionType)
+
+export const updateNewMessageTextCreator = (text: string): ActionType => ({
+    type: UPDATE_NEW_MESSAGE_TEXT,
     text,
 } as ActionType)
 

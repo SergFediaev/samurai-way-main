@@ -8,7 +8,7 @@ import {Profile} from './components/Profile/Profile'
 import {New} from './components/New/New'
 import {Music} from './components/Music/Music'
 import {Settings} from './components/Settings/Settings'
-import {ActionType, StateType} from './redux/state'
+import {ActionType, StateType, StoreType} from './redux/state'
 
 // const ProfileComponent = () => <Profile/>
 
@@ -17,9 +17,10 @@ import {ActionType, StateType} from './redux/state'
 type AppPropsType = {
     state: StateType
     dispatch: (action: ActionType) => void
+    store: StoreType
 }
 
-export const App = ({state, dispatch}: AppPropsType) => {
+export const App = ({state, dispatch, store}: AppPropsType) => {
     return <div className="app-wrapper">
         <Header/>
         <NavBar state={state.sidebar}/>
@@ -29,8 +30,8 @@ export const App = ({state, dispatch}: AppPropsType) => {
                 dispatch={dispatch}
             />}/>
             <Route path="/dialogs" render={() => <Dialogs
-                state={state.dialogsPage}
                 dispatch={dispatch}
+                store={store}
             />}/>
             <Route path="/new" component={New}/>
             <Route path="/music" component={Music}/>
