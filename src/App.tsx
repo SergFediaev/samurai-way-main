@@ -8,14 +8,14 @@ import {Profile} from './components/Profile/Profile'
 import {New} from './components/New/New'
 import {Music} from './components/Music/Music'
 import {Settings} from './components/Settings/Settings'
-import {ActionType, StateType, StoreType} from './redux/state'
+import {ActionsTypes, StateType, StoreType} from './redux/state'
 
 // const ProfileComponent = () => <Profile/>
 // const DialogsComponent = () => <Dialogs/>
 
 type AppPropsType = {
     state: StateType
-    dispatch: (action: ActionType) => void
+    dispatch: (action: ActionsTypes) => void
     store: StoreType
 }
 

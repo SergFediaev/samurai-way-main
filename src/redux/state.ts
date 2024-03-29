@@ -1,7 +1,7 @@
 import {PostPropsType} from '../components/Profile/Posts/Post/Post'
 import {DialogType, MessageType} from '../components/Dialogs/Dialogs'
-import profileReducer from './profile-reducer'
-import dialogsReducer from './dialogs-reducer'
+import profileReducer, {addPostActionCreator, changeNewTextActionCreator} from './profile-reducer'
+import dialogsReducer, {sendMessageCreator, updateNewMessageTextCreator} from './dialogs-reducer'
 import sidebarReducer from './sidebar-reducer'
 
 export type StateType = {
@@ -35,13 +35,14 @@ export type StoreType = {
     getState: () => StateType
     _callSubscriber: (state: StateType) => void
     subscribe: (observer: (state: StateType) => void) => void
-    dispatch: (action: ActionType) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionType = {
-    type: string
-    text: string
-}
+export type ActionsTypes =
+    ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof changeNewTextActionCreator>
+    | ReturnType<typeof sendMessageCreator>
+    | ReturnType<typeof updateNewMessageTextCreator>
 
 export const store: StoreType = {
     _state: {
@@ -128,7 +129,7 @@ export const store: StoreType = {
     subscribe(observer: (state: StateType) => void) {
         this._callSubscriber = observer
     },
-    dispatch(action: ActionType) {
+    dispatch(action: ActionsTypes) {
         this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._state.sidebar = sidebarReducer(this._state.sidebar, action)
@@ -136,4 +137,5 @@ export const store: StoreType = {
     },
 }
 
-// window.state = state
+// @ts-ignore
+window.store = store

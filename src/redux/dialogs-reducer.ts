@@ -1,10 +1,10 @@
-import {ActionType, DialogsType} from './state'
 import {MessageType} from '../components/Dialogs/Dialogs'
+import {ActionsTypes, DialogsType} from './state'
 
 const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT'
 const SEND_MESSAGE = 'SEND_MESSAGE'
 
-const dialogsReducer = (state: DialogsType, action: ActionType): DialogsType => {
+const dialogsReducer = (state: DialogsType, action: ActionsTypes): DialogsType => {
     switch (action.type) {
         case UPDATE_NEW_MESSAGE_TEXT:
             state.newMessageText = action.text
@@ -22,13 +22,13 @@ const dialogsReducer = (state: DialogsType, action: ActionType): DialogsType => 
     }
 }
 
-export const sendMessageCreator = (): ActionType => ({
+export const sendMessageCreator = () => ({
     type: SEND_MESSAGE,
-} as ActionType)
+} as const)
 
-export const updateNewMessageTextCreator = (text: string): ActionType => ({
+export const updateNewMessageTextCreator = (text: string) => ({
     type: UPDATE_NEW_MESSAGE_TEXT,
     text,
-} as ActionType)
+} as const)
 
 export default dialogsReducer

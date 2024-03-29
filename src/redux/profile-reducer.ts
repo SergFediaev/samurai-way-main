@@ -1,12 +1,12 @@
-import {ActionType, ProfilePageType} from './state'
 import {PostPropsType} from '../components/Profile/Posts/Post/Post'
+import {ActionsTypes, ProfilePageType} from './state'
 
-const ADD_POST = 'ADD-POST'
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT'
+export const ADD_POST = 'ADD-POST'
+export const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT'
 
-const profileReducer = (state: ProfilePageType, action: ActionType): ProfilePageType => {
+const profileReducer = (state: ProfilePageType, action: ActionsTypes): ProfilePageType => {
     switch (action.type) {
-        case 'ADD-POST':
+        case ADD_POST:
             const newPost: PostPropsType = {
                 id: ++state.posts.length,
                 message: state.newPostText,
@@ -16,21 +16,22 @@ const profileReducer = (state: ProfilePageType, action: ActionType): ProfilePage
             state.posts.push(newPost)
             state.newPostText = ''
             return state
-        case 'UPDATE-NEW-POST-TEXT':
-            state.newPostText = action.text
+        case CHANGE_NEW_TEXT:
+            state.newPostText = action.newText
             return state
         default:
             return state
     }
 }
 
-export const addPostActionCreator = (): ActionType => ({
-    type: ADD_POST,
-} as ActionType)
 
-export const updateNewPostTextActionCreator = (text: string): ActionType => ({
-    type: UPDATE_NEW_POST_TEXT,
-    text,
-} as ActionType)
+export const addPostActionCreator = () => ({
+    type: ADD_POST,
+} as const)
+
+export const changeNewTextActionCreator = (newText: string) => ({
+    type: CHANGE_NEW_TEXT,
+    newText,
+} as const)
 
 export default profileReducer

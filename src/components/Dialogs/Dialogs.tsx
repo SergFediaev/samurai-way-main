@@ -2,8 +2,8 @@ import React, {ChangeEvent} from 'react'
 import classes from './Dialogs.module.css'
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from './Message/Message'
-import {ActionType, StoreType} from '../../redux/state'
 import {sendMessageCreator, updateNewMessageTextCreator} from '../../redux/dialogs-reducer'
+import {ActionsTypes, StoreType} from '../../redux/state'
 
 export type DialogType = {
     id: number
@@ -16,14 +16,14 @@ export type MessageType = {
 }
 
 type DialogsPropsType = {
-    dispatch: (action: ActionType) => void
+    dispatch: (action: ActionsTypes) => void
     store: StoreType
 }
 
 export const Dialogs = ({dispatch, store}: DialogsPropsType) => {
     const state = store.getState().dialogsPage
-    const dialogsElements = state.dialogs.map(dialog => <DialogItem id={dialog.id} name={dialog.name}/>)
-    const messagesElements = state.messages.map(message => <Message message={message.message}/>)
+    const dialogsElements = state.dialogs.map(dialog => <DialogItem key={dialog.id} id={dialog.id} name={dialog.name}/>)
+    const messagesElements = state.messages.map(message => <Message key={message.id} message={message.message}/>)
     const newMessageText = state.newMessageText
 
     const onSendMessageClick = () => dispatch(sendMessageCreator())
