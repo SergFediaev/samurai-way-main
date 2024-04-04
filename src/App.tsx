@@ -8,7 +8,7 @@ import {Profile} from './components/Profile/Profile'
 import {New} from './components/New/New'
 import {Music} from './components/Music/Music'
 import {Settings} from './components/Settings/Settings'
-import {ActionsTypes, StateType, StoreType} from './redux/state'
+import {ActionsTypes, StateType} from './redux/store'
 
 // const ProfileComponent = () => <Profile/>
 // const DialogsComponent = () => <Dialogs/>
@@ -16,7 +16,7 @@ import {ActionsTypes, StateType, StoreType} from './redux/state'
 type AppPropsType = {
     state: StateType
     dispatch: (action: ActionsTypes) => void
-    store: StoreType
+    store: any
 }
 
 export const App = ({state, dispatch, store}: AppPropsType) => {

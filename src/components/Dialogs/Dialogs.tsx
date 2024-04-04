@@ -3,7 +3,7 @@ import classes from './Dialogs.module.css'
 import {DialogItem} from './DialogItem/DialogItem'
 import {Message} from './Message/Message'
 import {sendMessageCreator, updateNewMessageTextCreator} from '../../redux/dialogs-reducer'
-import {ActionsTypes, StoreType} from '../../redux/state'
+import {ActionsTypes, DialogsType} from '../../redux/store'
 
 export type DialogType = {
     id: number
@@ -17,11 +17,11 @@ export type MessageType = {
 
 type DialogsPropsType = {
     dispatch: (action: ActionsTypes) => void
-    store: StoreType
+    store: any
 }
 
 export const Dialogs = ({dispatch, store}: DialogsPropsType) => {
-    const state = store.getState().dialogsPage
+    const state = store.getState().dialogsPage as DialogsType
     const dialogsElements = state.dialogs.map(dialog => <DialogItem key={dialog.id} id={dialog.id} name={dialog.name}/>)
     const messagesElements = state.messages.map(message => <Message key={message.id} message={message.message}/>)
     const newMessageText = state.newMessageText
