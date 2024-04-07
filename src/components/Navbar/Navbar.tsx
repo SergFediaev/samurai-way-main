@@ -1,5 +1,5 @@
 import React from 'react'
-import classes from './NavBar.module.css'
+import classes from './Navbar.module.css'
 import {NavLink} from 'react-router-dom'
 import {SideBarType} from '../../redux/store'
 import {Friend} from '../Friends/Friend'
@@ -8,7 +8,7 @@ export type NavBarPropsType = {
     sidebar: SideBarType
 }
 
-export const NavBar = (props: NavBarPropsType) => <nav className={classes.nav}>
+export const Navbar = (props: NavBarPropsType) => <nav className={classes.nav}>
     <div className={classes.item}><NavLink to="/profile" activeClassName={classes.activeLink}>Profile</NavLink></div>
     <div className={classes.item}><NavLink to="/dialogs" activeClassName={classes.activeLink}>Messages</NavLink></div>
     <div className={classes.item}><NavLink to="/new" activeClassName={classes.activeLink}>New</NavLink></div>

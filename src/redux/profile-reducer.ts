@@ -47,7 +47,7 @@ export const addPostActionCreator = () => ({
     type: ADD_POST,
 } as const)
 
-export const changeNewTextActionCreator = (newText: string) => ({
+export const updateNewPostTextActionCreator = (newText: string) => ({
     type: CHANGE_NEW_TEXT,
     newText,
 } as const)

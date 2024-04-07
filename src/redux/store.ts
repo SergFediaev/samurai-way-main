@@ -1,7 +1,7 @@
 import {PostPropsType} from '../components/Profile/Posts/Post/Post'
 import {DialogType, MessageType} from '../components/Dialogs/Dialogs'
-import profileReducer, {addPostActionCreator, changeNewTextActionCreator} from './profile-reducer'
-import dialogsReducer, {sendMessageCreator, updateNewMessageTextCreator} from './dialogs-reducer'
+import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from './profile-reducer'
+import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from './dialogs-reducer'
 import sidebarReducer from './sidebar-reducer'
 
 export type StateType = {
@@ -13,7 +13,7 @@ export type StateType = {
 export type  DialogsType = {
     messages: MessageType[]
     dialogs: DialogType[]
-    newMessageText: string
+    newMessageBody: string
 }
 
 export type ProfilePageType = {
@@ -40,9 +40,9 @@ export type StoreType = {
 
 export type ActionsTypes =
     ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof changeNewTextActionCreator>
+    | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof sendMessageCreator>
-    | ReturnType<typeof updateNewMessageTextCreator>
+    | ReturnType<typeof updateNewMessageBodyCreator>
 
 export const store: StoreType = {
     _state: {
@@ -110,7 +110,7 @@ export const store: StoreType = {
                     id: 6, message: 'Yo',
                 },
             ],
-            newMessageText: '',
+            newMessageBody: '',
         },
         sidebar: {
             friends: [
