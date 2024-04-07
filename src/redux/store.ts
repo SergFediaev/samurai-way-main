@@ -7,7 +7,7 @@ import sidebarReducer from './sidebar-reducer'
 export type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsType
-    sidebar: SideBarType
+    sidebar: SidebarType
 }
 
 export type  DialogsType = {
@@ -21,7 +21,7 @@ export type ProfilePageType = {
     newPostText: string
 }
 
-export type SideBarType = {
+export type SidebarType = {
     friends: FriendType[]
 }
 
