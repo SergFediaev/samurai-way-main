@@ -1,26 +1,24 @@
-import {StateType} from './redux/store'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import {App} from './App'
 import {BrowserRouter} from 'react-router-dom'
 import {store} from './redux/redux-store'
+import {Provider} from './StoreContext'
 
-export const rerenderEntireTree = (state: StateType) => ReactDOM.render(<BrowserRouter>
-    <App
-        state={state}
-        dispatch={store.dispatch.bind(store)}
-        store={store}
-    />
+export const rerenderEntireTree = () => ReactDOM.render(<BrowserRouter>
+    <Provider store={store}>
+        <App/>
+    </Provider>
 </BrowserRouter>, document.getElementById('customRoot'))
 
-rerenderEntireTree(store.getState())
+rerenderEntireTree()
 
 store.subscribe(() => {
-    const state = store.getState()
-    rerenderEntireTree(state)
+    rerenderEntireTree()
 })
 
+/*
 let page = {
     _content: '',
     title: '',
@@ -33,4 +31,4 @@ let page = {
     render: function () {
         document.write(this._content)
     },
-}
+}*/
