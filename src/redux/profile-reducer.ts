@@ -1,28 +1,22 @@
 import {PostPropsType} from '../components/Profile/Posts/Post/Post'
-import {ActionsTypes, ProfilePageType} from './store'
+import {ActionsTypes} from './redux-store'
 
 export const ADD_POST = 'ADD-POST'
 export const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT'
 
-const initialState: ProfilePageType = {
+const initialState = {
     posts: [
-        {
-            id: 1, message: 'Hi, how are you', likesCount: 12,
-        },
-        {
-            id: 2, message: 'It\'s my first post.', likesCount: 30,
-        },
-        {
-            id: 3, message: 'Bla.', likesCount: 50,
-        },
-        {
-            id: 4, message: 'Da.', likesCount: 0,
-        },
-    ],
+        {id: 1, message: 'Hi, how are you', likesCount: 12},
+        {id: 2, message: 'It\'s my first post.', likesCount: 30},
+        {id: 3, message: 'Bla.', likesCount: 50},
+        {id: 4, message: 'Da.', likesCount: 0},
+    ] as PostPropsType[],
     newPostText: 'it-kamasutra.com',
 }
 
-const profileReducer = (state: ProfilePageType = initialState, action: ActionsTypes): ProfilePageType => {
+type InitialStateType = typeof initialState
+
+export const profileReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
         case ADD_POST:
             const newPost: PostPropsType = {
@@ -51,5 +45,3 @@ export const updateNewPostTextActionCreator = (newText: string) => ({
     type: CHANGE_NEW_TEXT,
     newText,
 } as const)
-
-export default profileReducer

@@ -2,13 +2,9 @@ import React from 'react'
 import classes from './Navbar.module.css'
 import {NavLink} from 'react-router-dom'
 import {Friend} from '../Friends/Friend'
-import {SidebarType} from '../../redux/store'
+import {NavbarPagePropsType} from './NavbarContainer'
 
-type NavbarPropsType = {
-    sidebar: SidebarType
-}
-
-export const Navbar = (props: NavbarPropsType) => {
+export const Navbar = (props: NavbarPagePropsType) => {
     return <nav className={classes.nav}>
         <div className={classes.item}>
             <NavLink to="/profile" activeClassName={classes.activeLink}>Profile</NavLink>

@@ -1,17 +1,9 @@
 import React from 'react'
 import classes from './Posts.module.css'
-import {Post, PostPropsType} from './Post/Post'
+import {Post} from './Post/Post'
+import {MyPostsPagePropsType} from './MyPostsContainer'
 
-export type PostsType = PostPropsType[]
-
-export type MyPostsPropsType = {
-    posts: PostsType
-    newPostText: string
-    updateNewPostText: (newPostText: string) => void
-    addPost: () => void
-}
-
-export const MyPosts = (props: MyPostsPropsType) => {
+export const MyPosts = (props: MyPostsPagePropsType) => {
     const postsElements = props.posts.map(post => <Post key={post.id}
                                                         id={post.id} message={post.message}
                                                         likesCount={post.likesCount}/>)

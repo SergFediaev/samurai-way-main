@@ -1,7 +1,7 @@
 import {combineReducers, createStore} from 'redux'
-import profileReducer from './profile-reducer'
-import sidebarReducer from './sidebar-reducer'
-import dialogsReducer from './dialogs-reducer'
+import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from './profile-reducer'
+import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from './dialogs-reducer'
+import {sidebarReducer} from './sidebar-reducer'
 
 export type AppStoreType = ReturnType<typeof reducers>
 
@@ -12,5 +12,11 @@ const reducers = combineReducers({
 })
 
 export const store = createStore(reducers)
+
+export type ActionsTypes =
+    ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof updateNewPostTextActionCreator>
+    | ReturnType<typeof sendMessageCreator>
+    | ReturnType<typeof updateNewMessageBodyCreator>
 
 // store.getState().

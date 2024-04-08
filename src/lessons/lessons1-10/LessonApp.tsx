@@ -1,10 +1,10 @@
-import React from 'react';
-import './LessonApp.css';
-import Technologies from "../../Technologies";
-import {Header} from "./Header";
-import Footer from "./Footer";
+import React from 'react'
+import './LessonApp.css'
+import {Technologies} from '../../Technologies'
+import {Footer} from './Footer'
+import {Header} from './Header'
 
-const LessonApp = () => {  // современная запись стрелочной фукнции.
+export const LessonApp = () => {  // современная запись стрелочной функции.
 // const LessonApp = function() { // старая запись анонимной функции.
 // function LessonApp()   { // старая запись функции.
     return <div>
@@ -18,8 +18,6 @@ const LessonApp = () => {  // современная запись стрелоч
         {/*<Accordion title="Second Acc" collapsed={true}/>*/}
     </div>
 }
-
-export default LessonApp;
 
 // function Star() {
 //     return <div>Start</div>;

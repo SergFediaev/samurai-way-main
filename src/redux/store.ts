@@ -1,36 +1,45 @@
 import {PostPropsType} from '../components/Profile/Posts/Post/Post'
-import {DialogType, MessageType} from '../components/Dialogs/Dialogs'
-import profileReducer, {addPostActionCreator, updateNewPostTextActionCreator} from './profile-reducer'
-import dialogsReducer, {sendMessageCreator, updateNewMessageBodyCreator} from './dialogs-reducer'
-import sidebarReducer from './sidebar-reducer'
+import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from './profile-reducer'
+import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from './dialogs-reducer'
+import {sidebarReducer} from './sidebar-reducer'
 
-export type StateType = {
+type StateType = {
     profilePage: ProfilePageType
     dialogsPage: DialogsType
     sidebar: SidebarType
 }
 
-export type  DialogsType = {
+type  DialogsType = {
     messages: MessageType[]
     dialogs: DialogType[]
     newMessageBody: string
 }
 
-export type ProfilePageType = {
-    posts: PostPropsType[]
-    newPostText: string
-}
-
-export type SidebarType = {
-    friends: FriendType[]
-}
-
-export type FriendType = {
+type DialogType = {
     id: number
     name: string
 }
 
-export type StoreType = {
+type MessageType = {
+    id: number
+    message: string
+}
+
+type ProfilePageType = {
+    posts: PostPropsType[]
+    newPostText: string
+}
+
+type SidebarType = {
+    friends: FriendType[]
+}
+
+type FriendType = {
+    id: number
+    name: string
+}
+
+type StoreType = {
     _state: StateType
     getState: () => StateType
     _callSubscriber: (state: StateType) => void
@@ -38,77 +47,39 @@ export type StoreType = {
     dispatch: (action: ActionsTypes) => void
 }
 
-export type ActionsTypes =
+type ActionsTypes =
     ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof sendMessageCreator>
     | ReturnType<typeof updateNewMessageBodyCreator>
 
-export const store: StoreType = {
+const store: StoreType = {
     _state: {
         profilePage: {
             posts: [
-                {
-                    id: 1, message: 'Hi, how are you', likesCount: 12,
-                },
-                {
-                    id: 2, message: 'It\'s my first post.', likesCount: 30,
-                },
-                {
-                    id: 3, message: 'Bla.', likesCount: 50,
-                },
-                {
-                    id: 4, message: 'Da.', likesCount: 0,
-                },
+                {id: 1, message: 'Hi, how are you', likesCount: 12},
+                {id: 2, message: 'It\'s my first post.', likesCount: 30},
+                {id: 3, message: 'Bla.', likesCount: 50},
+                {id: 4, message: 'Da.', likesCount: 0},
             ],
             newPostText: 'it-kamasutra.com',
         },
         dialogsPage: {
             dialogs: [
-                {
-                    id: 1,
-                    name: 'Dimych',
-                },
-                {
-                    id: 2,
-                    name: 'Andrew',
-                },
-                {
-                    id: 3,
-                    name: 'Sveta',
-                },
-                {
-                    id: 4,
-                    name: 'Sasha',
-                },
-                {
-                    id: 5,
-                    name: 'Valera',
-                },
-                {
-                    id: 6,
-                    name: 'Viktor',
-                },
+                {id: 1, name: 'Dimych'},
+                {id: 2, name: 'Andrew'},
+                {id: 3, name: 'Sveta'},
+                {id: 4, name: 'Sasha'},
+                {id: 5, name: 'Valera'},
+                {id: 6, name: 'Viktor'},
             ],
             messages: [
-                {
-                    id: 1, message: 'Hi',
-                },
-                {
-                    id: 2, message: 'How is your it kamasutra',
-                },
-                {
-                    id: 3, message: 'Yo',
-                },
-                {
-                    id: 4, message: 'Yo',
-                },
-                {
-                    id: 5, message: 'Yo',
-                },
-                {
-                    id: 6, message: 'Yo',
-                },
+                {id: 1, message: 'Hi'},
+                {id: 2, message: 'How is your it kamasutra'},
+                {id: 3, message: 'Yo'},
+                {id: 4, message: 'Yo'},
+                {id: 5, message: 'Yo'},
+                {id: 6, message: 'Yo'},
             ],
             newMessageBody: '',
         },
