@@ -2,7 +2,7 @@ import {PostPropsType} from '../components/Profile/Posts/Post/Post'
 import {ActionsTypes} from './redux-store'
 
 export const ADD_POST = 'ADD-POST'
-export const CHANGE_NEW_TEXT = 'CHANGE-NEW-TEXT'
+export const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 
 const initialState = {
     posts: [
@@ -25,17 +25,17 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
                 likesCount: 0,
             }
 
-            const stateCopy = {...state}
-            stateCopy.posts = [...state.posts]
-            stateCopy.posts.push(newPost)
-            stateCopy.newPostText = ''
-            return stateCopy
+            return {
+                ...state,
+                posts: [...state.posts, newPost],
+                newPostText: '',
+            }
         }
-        case CHANGE_NEW_TEXT: {
-            const stateCopy = {...state}
-            stateCopy.newPostText = action.newText
-            return stateCopy
-        }
+        case UPDATE_NEW_POST_TEXT:
+            return {
+                ...state,
+                newPostText: action.newText,
+            }
         default:
             return state
     }
@@ -46,6 +46,6 @@ export const addPostActionCreator = () => ({
 } as const)
 
 export const updateNewPostTextActionCreator = (newText: string) => ({
-    type: CHANGE_NEW_TEXT,
+    type: UPDATE_NEW_POST_TEXT,
     newText,
 } as const)

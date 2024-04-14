@@ -38,22 +38,25 @@ const initialState = {
 
 type InitialStateType = typeof initialState
 
-const UPDATE_NEW_MESSAGE_TEXT = 'UPDATE_NEW_MESSAGE_TEXT'
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY'
 const SEND_MESSAGE = 'SEND_MESSAGE'
 
 export const dialogsReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_TEXT:
-            state.newMessageBody = action.text
-            return state
-        case SEND_MESSAGE:
-            const text = state.newMessageBody
-            state.newMessageBody = ''
-            state.messages.push({
-                id: ++state.messages.length,
-                message: text,
-            } as MessageType)
-            return state
+        case UPDATE_NEW_MESSAGE_BODY:
+            return {...state, newMessageBody: action.body}
+        case SEND_MESSAGE: {
+            const body = state.newMessageBody
+
+            return {
+                ...state,
+                newMessageBody: '',
+                messages: [...state.messages, {
+                    id: ++state.messages.length,
+                    message: body,
+                }],
+            }
+        }
         default:
             return state
     }
@@ -63,7 +66,7 @@ export const sendMessageCreator = () => ({
     type: SEND_MESSAGE,
 } as const)
 
-export const updateNewMessageBodyCreator = (text: string) => ({
-    type: UPDATE_NEW_MESSAGE_TEXT,
-    text,
+export const updateNewMessageBodyCreator = (body: string) => ({
+    type: UPDATE_NEW_MESSAGE_BODY,
+    body,
 } as const)
