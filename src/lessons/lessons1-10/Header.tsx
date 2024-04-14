@@ -1,11 +1,10 @@
-import React from "react";
+import React from 'react'
 
 type HeaderPropsType = {
     title: string
 }
 
 export function Header(props: HeaderPropsType) {
-    // debugger
     console.log('Header rendering')
     // return <>{props.title}</>
     return (

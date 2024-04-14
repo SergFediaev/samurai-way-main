@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 type RatingPropsType = {
     value: number
@@ -52,16 +52,13 @@ export function Rating(props: RatingPropsType) {
     }
 }
 
-// debugger
-
 type StarPropsType = {
     selected: boolean
 }
 
 // const Star = (props: any) => <span>Star *</span>;
 function Star(props: StarPropsType) {
-    console.log('Star rendering');
-    // debugger
+    console.log('Star rendering')
     if (props.selected) {
         return <span><b>Star *</b></span>
     } else {

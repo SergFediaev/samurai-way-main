@@ -5,7 +5,8 @@ import {MyPostsPagePropsType} from './MyPostsContainer'
 
 export const MyPosts = (props: MyPostsPagePropsType) => {
     const postsElements = props.posts.map(post => <Post key={post.id}
-                                                        id={post.id} message={post.message}
+                                                        id={post.id}
+                                                        message={post.message}
                                                         likesCount={post.likesCount}/>)
 
     const newPostElement = React.createRef<HTMLTextAreaElement>()

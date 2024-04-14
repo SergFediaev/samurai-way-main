@@ -12,10 +12,10 @@ type FriendType = {
 const initialState = {
     friends: [
         {id: 1, name: 'Dimych'},
-        {id: 1, name: 'Sveta'},
-        {id: 1, name: 'Viktor'},
-        {id: 1, name: 'Valera'},
-        {id: 1, name: 'Vika'},
+        {id: 2, name: 'Sveta'},
+        {id: 3, name: 'Viktor'},
+        {id: 4, name: 'Valera'},
+        {id: 5, name: 'Vika'},
     ] as FriendType[],
 }
 
