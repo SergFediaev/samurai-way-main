@@ -6,7 +6,6 @@ import {mockedUsers} from '../../redux/users-reducer'
 export const Users = (props: UsersPagePropsType) => {
     if (props.users.length === 0) props.setUsers(mockedUsers)
 
-    debugger
     return <div>
         {props.users.map(user => <div key={user.id}>
             <span>
