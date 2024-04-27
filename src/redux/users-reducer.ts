@@ -9,25 +9,34 @@ const MOCKED_AVATAR = 'https://asset.kompas.com/crops/-QSHMGMmRvrDcDZeZbRh0wrk4N
 export const mockedUsers: UserType[] = [
     {
         id: 1,
-        photoUrl: MOCKED_AVATAR,
+        photos: {
+            small: MOCKED_AVATAR,
+            large: MOCKED_AVATAR,
+        },
         followed: false,
-        fullName: 'Dmitry',
+        name: 'Dmitry',
         status: 'I am a boss',
         location: {city: 'Minsk', country: 'Belarus'},
     },
     {
         id: 2,
-        photoUrl: MOCKED_AVATAR,
+        photos: {
+            small: MOCKED_AVATAR,
+            large: MOCKED_AVATAR,
+        },
         followed: false,
-        fullName: 'Sasha',
+        name: 'Sasha',
         status: 'I am a boss',
         location: {city: 'Moscow', country: 'Russia'},
     },
     {
         id: 3,
-        photoUrl: MOCKED_AVATAR,
+        photos: {
+            small: MOCKED_AVATAR,
+            large: MOCKED_AVATAR,
+        },
         followed: false,
-        fullName: 'Andrew',
+        name: 'Andrew',
         status: 'I am a boss',
         location: {city: 'Kiev', country: 'Ukraine'},
     },
@@ -39,9 +48,12 @@ const initialState = {
 
 export type UserType = {
     id: number
-    photoUrl: string
+    photos: {
+        small: string
+        large: string
+    }
     followed: boolean
-    fullName: string
+    name: string
     status: string
     location: LocationType
 }
