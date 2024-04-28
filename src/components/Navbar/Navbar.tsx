@@ -13,6 +13,9 @@ export const Navbar = (props: NavbarPagePropsType) => {
             <NavLink to="/dialogs" activeClassName={classes.activeLink}>Messages</NavLink>
         </div>
         <div className={classes.item}>
+            <NavLink to="/users" activeClassName={classes.activeLink}>Users</NavLink>
+        </div>
+        <div className={classes.item}>
             <NavLink to="/new" activeClassName={classes.activeLink}>New</NavLink>
         </div>
         <div className={classes.item}>
