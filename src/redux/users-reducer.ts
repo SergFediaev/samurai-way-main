@@ -3,6 +3,8 @@ import {ActionsTypes} from './redux-store'
 export const FOLLOW = 'FOLLOW'
 export const UNFOLLOW = 'UNFOLLOW'
 export const SET_USERS = 'SET_USERS'
+export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
+export const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 
 const MOCKED_AVATAR = 'https://asset.kompas.com/crops/-QSHMGMmRvrDcDZeZbRh0wrk4NM=/0x81:466x391/750x500/data/photo/2023/11/09/654c73dbe7559.jpg'
 
@@ -44,6 +46,9 @@ export const mockedUsers: UserType[] = [
 
 const initialState = {
     users: [] as UserType[],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
 }
 
 export type UserType = {
@@ -78,7 +83,11 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
                 users: state.users.map(user => user.id === action.userId ? {...user, followed: false} : user),
             }
         case SET_USERS:
-            return {...state, users: [...state.users, ...action.users]}
+            return {...state, users: action.users}
+        case SET_CURRENT_PAGE:
+            return {...state, currentPage: action.currentPage}
+        case SET_TOTAL_USERS_COUNT:
+            return {...state, totalUsersCount: action.totalUsersCount}
         default:
             return state
     }
@@ -97,4 +106,14 @@ export const unfollowActionCreator = (userId: number) => ({
 export const setUsersActionCreator = (users: UserType[]) => ({
     type: SET_USERS,
     users,
+} as const)
+
+export const setCurrentPageActionCreator = (currentPage: number) => ({
+    type: SET_CURRENT_PAGE,
+    currentPage,
+} as const)
+
+export const setUsersTotalCountActionCreator = (totalUsersCount: number) => ({
+    type: SET_TOTAL_USERS_COUNT,
+    totalUsersCount,
 } as const)

@@ -2,7 +2,14 @@ import {combineReducers, createStore} from 'redux'
 import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from './profile-reducer'
 import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from './dialogs-reducer'
 import {sidebarReducer} from './sidebar-reducer'
-import {followActionCreator, setUsersActionCreator, unfollowActionCreator, usersReducer} from './users-reducer'
+import {
+    followActionCreator,
+    setCurrentPageActionCreator,
+    setUsersActionCreator,
+    setUsersTotalCountActionCreator,
+    unfollowActionCreator,
+    usersReducer,
+} from './users-reducer'
 
 export type AppStoreType = ReturnType<typeof reducers>
 
@@ -23,5 +30,7 @@ export type ActionsTypes =
     | ReturnType<typeof followActionCreator>
     | ReturnType<typeof unfollowActionCreator>
     | ReturnType<typeof setUsersActionCreator>
+    | ReturnType<typeof setCurrentPageActionCreator>
+    | ReturnType<typeof setUsersTotalCountActionCreator>
 
 // store.getState().
