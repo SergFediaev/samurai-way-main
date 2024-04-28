@@ -1,5 +1,4 @@
 import {connect} from 'react-redux'
-import {Users} from './Users'
 import {AppStoreType} from '../../redux/redux-store'
 import {Dispatch} from 'redux'
 import {
@@ -10,6 +9,36 @@ import {
     unfollowActionCreator,
     UserType,
 } from '../../redux/users-reducer'
+import React from 'react'
+import axios from 'axios'
+import {Users} from './Users'
+
+class UsersContainer extends React.Component<any> {
+    componentDidMount() {
+        console.log('componentDidMount() Users')
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+            this.props.setTotalUsersCount(response.data.totalCount)
+        })
+    }
+
+    onPageChanged = (pageNumber: number) => {
+        this.props.setCurrentPage(pageNumber)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`).then(response => {
+            this.props.setUsers(response.data.items)
+        })
+    }
+
+    render() {
+        return <Users totalUsersCount={this.props.totalUsersCount}
+                      pageSize={this.props.pageSize}
+                      currentPage={this.props.currentPage}
+                      onPageChanged={this.onPageChanged}
+                      users={this.props.users}
+                      unfollow={this.props.unfollow}
+                      follow={this.props.follow}/>
+    }
+}
 
 type MapStateToPropsType = {
     users: UserType[]
@@ -57,4 +86,4 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     }
 }
 
-export const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users)
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
