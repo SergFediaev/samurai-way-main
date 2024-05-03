@@ -5,6 +5,7 @@ export const UNFOLLOW = 'UNFOLLOW'
 export const SET_USERS = 'SET_USERS'
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 export const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
 
 const MOCKED_AVATAR = 'https://asset.kompas.com/crops/-QSHMGMmRvrDcDZeZbRh0wrk4NM=/0x81:466x391/750x500/data/photo/2023/11/09/654c73dbe7559.jpg'
 
@@ -49,6 +50,7 @@ const initialState = {
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
+    isFetching: false,
 }
 
 export type UserType = {
@@ -88,6 +90,8 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
             return {...state, currentPage: action.currentPage}
         case SET_TOTAL_USERS_COUNT:
             return {...state, totalUsersCount: action.totalUsersCount}
+        case TOGGLE_IS_FETCHING:
+            return {...state, isFetching: action.isFetching}
         default:
             return state
     }
@@ -116,4 +120,9 @@ export const setCurrentPageActionCreator = (currentPage: number) => ({
 export const setUsersTotalCountActionCreator = (totalUsersCount: number) => ({
     type: SET_TOTAL_USERS_COUNT,
     totalUsersCount,
+} as const)
+
+export const toggleIsFetchingActionCreator = (isFetching: boolean) => ({
+    type: TOGGLE_IS_FETCHING,
+    isFetching,
 } as const)

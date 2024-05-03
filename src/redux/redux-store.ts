@@ -7,6 +7,7 @@ import {
     setCurrentPageActionCreator,
     setUsersActionCreator,
     setUsersTotalCountActionCreator,
+    toggleIsFetchingActionCreator,
     unfollowActionCreator,
     usersReducer,
 } from './users-reducer'
@@ -32,5 +33,6 @@ export type ActionsTypes =
     | ReturnType<typeof setUsersActionCreator>
     | ReturnType<typeof setCurrentPageActionCreator>
     | ReturnType<typeof setUsersTotalCountActionCreator>
+    | ReturnType<typeof toggleIsFetchingActionCreator>
 
 // store.getState().
