@@ -2,12 +2,12 @@ import {connect} from 'react-redux'
 import {AppStoreType} from '../../redux/redux-store'
 import {Dispatch} from 'redux'
 import {
-    followActionCreator,
-    setCurrentPageActionCreator,
-    setUsersActionCreator,
-    setUsersTotalCountActionCreator,
-    toggleIsFetchingActionCreator,
-    unfollowActionCreator,
+    follow,
+    setCurrentPage,
+    setTotalUsersCount,
+    setUsers,
+    toggleIsFetching,
+    unfollow,
     UserType,
 } from '../../redux/users-reducer'
 import React from 'react'
@@ -83,24 +83,31 @@ const mapStateToProps = (state: AppStoreType): MapStateToPropsType => {
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         follow: (userId: number) => {
-            dispatch(followActionCreator(userId))
+            dispatch(follow(userId))
         },
         unfollow: (userId: number) => {
-            dispatch(unfollowActionCreator(userId))
+            dispatch(unfollow(userId))
         },
         setUsers: (users: UserType[]) => {
-            dispatch(setUsersActionCreator(users))
+            dispatch(setUsers(users))
         },
         setCurrentPage: (currentPage: number) => {
-            dispatch(setCurrentPageActionCreator(currentPage))
+            dispatch(setCurrentPage(currentPage))
         },
         setTotalUsersCount: (totalCount: number) => {
-            dispatch(setUsersTotalCountActionCreator(totalCount))
+            dispatch(setTotalUsersCount(totalCount))
         },
         toggleIsFetching: (isFetching: boolean) => {
-            dispatch(toggleIsFetchingActionCreator(isFetching))
+            dispatch(toggleIsFetching(isFetching))
         },
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default connect(mapStateToProps, {
+    follow,
+    unfollow,
+    setUsers,
+    setCurrentPage,
+    setTotalUsersCount,
+    toggleIsFetching,
+})(UsersContainer)
