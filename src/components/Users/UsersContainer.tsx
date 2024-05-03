@@ -1,6 +1,5 @@
 import {connect} from 'react-redux'
 import {AppStoreType} from '../../redux/redux-store'
-import {Dispatch} from 'redux'
 import {
     follow,
     setCurrentPage,
@@ -80,7 +79,7 @@ const mapStateToProps = (state: AppStoreType): MapStateToPropsType => {
     }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
+/*const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
         follow: (userId: number) => {
             dispatch(follow(userId))
@@ -101,7 +100,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
             dispatch(toggleIsFetching(isFetching))
         },
     }
-}
+}*/
 
 export default connect(mapStateToProps, {
     follow,
