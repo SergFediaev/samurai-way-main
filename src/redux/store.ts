@@ -1,5 +1,5 @@
 import {PostPropsType} from '../components/Profile/Posts/Post/Post'
-import {addPostActionCreator, profileReducer, updateNewPostTextActionCreator} from './profile-reducer'
+import {addPostActionCreator, updateNewPostTextActionCreator} from './profile-reducer'
 import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from './dialogs-reducer'
 import {sidebarReducer} from './sidebar-reducer'
 
@@ -101,7 +101,7 @@ const store: StoreType = {
         this._callSubscriber = observer
     },
     dispatch(action: ActionsTypes) {
-        this._state.profilePage = profileReducer(this._state.profilePage, action)
+        // this._state.profilePage = profileReducer(this._state.profilePage, action)
         this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action)
         this._state.sidebar = sidebarReducer(this._state.sidebar, action)
         this._callSubscriber(this._state)
