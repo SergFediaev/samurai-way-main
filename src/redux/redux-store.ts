@@ -7,6 +7,7 @@ import {
     setCurrentPage,
     setTotalUsersCount,
     setUsers,
+    toggleFollowingProgress,
     toggleIsFetching,
     unfollow,
     usersReducer,
@@ -38,5 +39,6 @@ export type ActionsTypes =
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setAuthUserData>
+    | ReturnType<typeof toggleFollowingProgress>
 
 // store.getState().

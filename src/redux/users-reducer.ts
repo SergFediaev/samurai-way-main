@@ -6,6 +6,7 @@ export const SET_USERS = 'SET_USERS'
 export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 export const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT'
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING'
+const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS'
 
 const MOCKED_AVATAR = 'https://asset.kompas.com/crops/-QSHMGMmRvrDcDZeZbRh0wrk4NM=/0x81:466x391/750x500/data/photo/2023/11/09/654c73dbe7559.jpg'
 
@@ -51,6 +52,7 @@ const initialState = {
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: false,
+    followingInProgress: [] as Array<number>,
 }
 
 export type UserType = {
@@ -92,6 +94,12 @@ export const usersReducer = (state: InitialStateType = initialState, action: Act
             return {...state, totalUsersCount: action.totalUsersCount}
         case TOGGLE_IS_FETCHING:
             return {...state, isFetching: action.isFetching}
+        case TOGGLE_IS_FOLLOWING_PROGRESS:
+            return {
+                ...state, followingInProgress: action.isFetching
+                    ? [...state.followingInProgress, action.userId]
+                    : state.followingInProgress.filter(id => id !== action.userId),
+            }
         default:
             return state
     }
@@ -125,4 +133,10 @@ export const setTotalUsersCount = (totalUsersCount: number) => ({
 export const toggleIsFetching = (isFetching: boolean) => ({
     type: TOGGLE_IS_FETCHING,
     isFetching,
+} as const)
+
+export const toggleFollowingProgress = (isFetching: boolean, userId: number) => ({
+    type: TOGGLE_IS_FOLLOWING_PROGRESS,
+    isFetching,
+    userId,
 } as const)
