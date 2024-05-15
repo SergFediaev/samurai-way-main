@@ -11,13 +11,14 @@ const mapStateToPropsForRedirect = (state: AppStoreType): MapStatePropsForRedire
     isAuth: state.auth.isAuth,
 })
 
-export const withAuthRedirect = (Component: ComponentType<any>) => {
-
-    class RedirectComponent extends React.Component<any, any> {
+export const withAuthRedirect = <T, >(Component: ComponentType<T>) => {
+    class RedirectComponent extends React.Component<MapStatePropsForRedirectType> {
         render() {
-            if (!this.props.isAuth) return <Redirect to={'/login'}/>
+            const {isAuth, ...restProps} = this.props
 
-            return <Component {...this.props}/>
+            if (!isAuth) return <Redirect to={'/login'}/>
+
+            return <Component {...restProps as T}/>
         }
     }
 

@@ -35,12 +35,12 @@ class ProfileContainer extends React.Component<PropsType> {
     }
 }
 
-const AuthRedirectComponent = withAuthRedirect(ProfileContainer)
+// const AuthRedirectComponent = withAuthRedirect(ProfileContainer)
 
 const mapStateToProps = (state: AppStoreType): MapStatePropsType => ({
     profile: state.profilePage.profile,
 })
 
-const WithUrlDataContainerComponent = withRouter(AuthRedirectComponent)
+const WithUrlDataContainerComponent = withRouter(ProfileContainer)
 
-export default connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent)
+export default withAuthRedirect(connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent))
