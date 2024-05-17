@@ -1,10 +1,11 @@
 import {connect} from 'react-redux'
 import {AppStoreType} from '../../redux/redux-store'
 import {follow, getUsers, setCurrentPage, toggleFollowingProgress, unfollow, UserType} from '../../redux/users-reducer'
-import React from 'react'
+import React, {ComponentType} from 'react'
 import {Users} from './Users'
 import {Preloader} from '../common/Preloader/Preloader'
 import {withAuthRedirect} from '../../hoc/withAuthRedirect'
+import {compose} from 'redux'
 
 class UsersContainer extends React.Component<any> {
     componentDidMount() {
@@ -85,10 +86,19 @@ const mapStateToProps = (state: AppStoreType): MapStateToPropsType => {
     }
 }*/
 
-export default withAuthRedirect(connect(mapStateToProps, {
+export default compose<ComponentType>(withAuthRedirect,
+    connect(mapStateToProps, {
+        follow,
+        unfollow,
+        setCurrentPage,
+        toggleFollowingProgress,
+        getUsers,
+    }))(UsersContainer)
+
+/*export default withAuthRedirect(connect(mapStateToProps, {
     follow,
     unfollow,
     setCurrentPage,
     toggleFollowingProgress,
     getUsers,
-})(UsersContainer))
+})(UsersContainer))*/

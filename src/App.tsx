@@ -4,12 +4,12 @@ import {Route} from 'react-router-dom'
 import {New} from './components/New/New'
 import {Music} from './components/Music/Music'
 import {Settings} from './components/Settings/Settings'
-import {DialogsContainer} from './components/Dialogs/DialogsContainer'
 import {NavbarContainer} from './components/Navbar/NavbarContainer'
 import UsersContainer from './components/Users/UsersContainer'
 import ProfileContainer from './components/Profile/ProfileContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
 import {LoginPage} from './components/Login/LoginPage'
+import DialogsContainer from './components/Dialogs/DialogsContainer'
 
 // const ProfileComponent = () => <Profile/>
 // const DialogsComponent = () => <Dialogs/>
