@@ -1,5 +1,11 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux'
-import {addPostActionCreator, profileReducer, setUserProfile, updateNewPostTextActionCreator} from './profile-reducer'
+import {
+    addPostActionCreator,
+    profileReducer,
+    setStatus,
+    setUserProfile,
+    updateNewPostTextActionCreator,
+} from './profile-reducer'
 import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from './dialogs-reducer'
 import {sidebarReducer} from './sidebar-reducer'
 import {
@@ -41,5 +47,6 @@ export type ActionsTypes =
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setAuthUserData>
     | ReturnType<typeof toggleFollowingProgress>
+    | ReturnType<typeof setStatus>
 
 // store.getState().
