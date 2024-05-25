@@ -20,6 +20,7 @@ import {
 } from './users-reducer'
 import {authReducer, setAuthUserData} from './auth-reducer'
 import thunk from 'redux-thunk'
+import {reducer as formReducer} from 'redux-form'
 
 export type AppStoreType = ReturnType<typeof reducers>
 
@@ -29,6 +30,7 @@ const reducers = combineReducers({
     sidebar: sidebarReducer,
     usersPage: usersReducer,
     auth: authReducer,
+    form: formReducer,
 })
 
 export const store = createStore(reducers, applyMiddleware(thunk))
