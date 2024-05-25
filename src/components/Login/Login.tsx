@@ -6,7 +6,7 @@ type FormDataType = {
     rememberMe: boolean
 }
 
-export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = (props: any) => {
+export const LoginForm: React.FC<InjectedFormProps<FormDataType>> = props => {
     return <form onSubmit={props.handleSubmit}>
         <div>
             <Field placeholder={'Login'} name={'login'} component={'input'}/>

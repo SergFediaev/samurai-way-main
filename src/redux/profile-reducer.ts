@@ -4,7 +4,6 @@ import {Dispatch} from 'redux'
 import {profileApi, usersApi} from '../api/api'
 
 export const ADD_POST = 'ADD-POST'
-export const UPDATE_NEW_POST_TEXT = 'UPDATE_NEW_POST_TEXT'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
@@ -15,7 +14,6 @@ const initialState = {
         {id: 3, message: 'Bla.', likesCount: 50},
         {id: 4, message: 'Da.', likesCount: 0},
     ] as PostPropsType[],
-    newPostText: 'it-kamasutra.com',
     profile: null,
     status: '',
 }
@@ -27,21 +25,15 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
         case ADD_POST: {
             const newPost: PostPropsType = {
                 id: state.posts.length + 1,
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0,
             }
 
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: '',
             }
         }
-        case UPDATE_NEW_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.newText,
-            }
         case SET_USER_PROFILE: {
             return {...state, profile: action.profile}
         }
@@ -53,13 +45,9 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
     }
 }
 
-export const addPostActionCreator = () => ({
+export const addPostActionCreator = (newPostText: string) => ({
     type: ADD_POST,
-} as const)
-
-export const updateNewPostTextActionCreator = (newText: string) => ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText,
+    newPostText,
 } as const)
 
 export const setUserProfile = (profile: any) => ({

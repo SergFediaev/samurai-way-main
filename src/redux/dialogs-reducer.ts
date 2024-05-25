@@ -3,7 +3,6 @@ import {ActionsTypes} from './redux-store'
 export type DialogsPageType = {
     messages: MessageType[]
     dialogs: DialogType[]
-    newMessageBody: string
 }
 
 type DialogType = {
@@ -33,24 +32,19 @@ const initialState = {
         {id: 5, message: 'Yo'},
         {id: 6, message: 'Yo'},
     ] as MessageType[],
-    newMessageBody: '',
 }
 
 type InitialStateType = typeof initialState
 
-const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY'
 const SEND_MESSAGE = 'SEND_MESSAGE'
 
 export const dialogsReducer = (state: InitialStateType = initialState, action: ActionsTypes): InitialStateType => {
     switch (action.type) {
-        case UPDATE_NEW_MESSAGE_BODY:
-            return {...state, newMessageBody: action.body}
         case SEND_MESSAGE: {
-            const body = state.newMessageBody
+            const body = action.newMessageBody
 
             return {
                 ...state,
-                newMessageBody: '',
                 messages: [...state.messages, {
                     id: ++state.messages.length,
                     message: body,
@@ -62,11 +56,7 @@ export const dialogsReducer = (state: InitialStateType = initialState, action: A
     }
 }
 
-export const sendMessageCreator = () => ({
+export const sendMessageCreator = (newMessageBody: string) => ({
     type: SEND_MESSAGE,
-} as const)
-
-export const updateNewMessageBodyCreator = (body: string) => ({
-    type: UPDATE_NEW_MESSAGE_BODY,
-    body,
+    newMessageBody,
 } as const)

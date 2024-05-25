@@ -1,7 +1,7 @@
 import {PostPropsType} from '../components/Profile/Posts/Post/Post'
-import {addPostActionCreator, updateNewPostTextActionCreator} from './profile-reducer'
-import {dialogsReducer, sendMessageCreator, updateNewMessageBodyCreator} from './dialogs-reducer'
 import {sidebarReducer} from './sidebar-reducer'
+import {dialogsReducer, sendMessageCreator} from './dialogs-reducer'
+import {addPostActionCreator} from './profile-reducer'
 
 type StateType = {
     profilePage: ProfilePageType
@@ -12,7 +12,6 @@ type StateType = {
 type  DialogsType = {
     messages: MessageType[]
     dialogs: DialogType[]
-    newMessageBody: string
 }
 
 type DialogType = {
@@ -49,9 +48,7 @@ type StoreType = {
 
 type ActionsTypes =
     ReturnType<typeof addPostActionCreator>
-    | ReturnType<typeof updateNewPostTextActionCreator>
     | ReturnType<typeof sendMessageCreator>
-    | ReturnType<typeof updateNewMessageBodyCreator>
 
 const store: StoreType = {
     _state: {
