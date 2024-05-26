@@ -1,7 +1,8 @@
 import {Component} from 'react'
 import {Header} from './Header'
 import {connect} from 'react-redux'
-import {getAuthUserData} from '../../redux/auth-reducer'
+import {getAuthUserData, logout} from '../../redux/auth-reducer'
+import {AppStoreType} from '../../redux/redux-store'
 
 class HeaderContainer extends Component<any> {
     componentDidMount() {
@@ -13,9 +14,9 @@ class HeaderContainer extends Component<any> {
     }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppStoreType) => ({
     isAuth: state.auth.isAuth,
     login: state.auth.login,
 })
 
-export default connect(mapStateToProps, {getAuthUserData})(HeaderContainer)
+export default connect(mapStateToProps, {getAuthUserData, logout})(HeaderContainer)
