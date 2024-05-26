@@ -15,6 +15,7 @@ import {authReducer, setAuthUserData} from './auth-reducer'
 import thunk from 'redux-thunk'
 import {reducer as formReducer} from 'redux-form'
 import {dialogsReducer, sendMessageCreator} from './dialogs-reducer'
+import {appReducer, initializedSuccess} from './app-reducer'
 
 export type AppStoreType = ReturnType<typeof reducers>
 
@@ -25,6 +26,7 @@ const reducers = combineReducers({
     usersPage: usersReducer,
     auth: authReducer,
     form: formReducer,
+    app: appReducer,
 })
 
 export const store = createStore(reducers, applyMiddleware(thunk))
@@ -42,5 +44,6 @@ export type ActionsTypes =
     | ReturnType<typeof setAuthUserData>
     | ReturnType<typeof toggleFollowingProgress>
     | ReturnType<typeof setStatus>
+    | ReturnType<typeof initializedSuccess>
 
 // store.getState().
