@@ -6,6 +6,13 @@ import {store} from './redux/redux-store'
 import {Provider} from 'react-redux'
 import App from './App'
 
+/*const h1 = document.createElement('h1')
+h1.innerText = 'Hello World!'
+document.body.appendChild(h1)
+
+React.createElement('span')
+React.createElement(App)*/
+
 ReactDOM.render(<BrowserRouter>
     <Provider store={store}>
         <App/>
