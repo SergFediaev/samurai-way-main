@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {memo} from 'react'
 import classes from './Posts.module.css'
 import {Post} from './Post/Post'
 import {MyPostsPagePropsType} from './MyPostsContainer'
@@ -27,7 +27,15 @@ let AddNewPostForm: React.FC<InjectedFormProps<FormDataType>> = props => {
 
 let AddNewPostFormRedux = reduxForm<FormDataType>({form: 'ProfileAddNewPostForm'})(AddNewPostForm)
 
-export const MyPosts = (props: MyPostsPagePropsType) => {
+// @ts-ignore
+// window.props = []
+
+export const MyPosts = memo((props: MyPostsPagePropsType) => {
+    // @ts-ignore
+    // window.props.push(props)
+    // console.log('MyPosts render')
+    // console.log('MyPosts props: ', props)
+
     const postsElements = props.posts.map(post => <Post key={post.id}
                                                         id={post.id}
                                                         message={post.message}
@@ -41,4 +49,35 @@ export const MyPosts = (props: MyPostsPagePropsType) => {
         <AddNewPostFormRedux onSubmit={onAddPost}/>
         <div className={classes.posts}>{postsElements}</div>
     </div>
-}
+})
+
+/*
+export class MyPosts extends React.PureComponent<MyPostsPagePropsType> {
+    /!*    componentDidUpdate(prevProps: Readonly<MyPostsPagePropsType>, prevState: Readonly<{}>, snapshot?: any) {
+            console.log('MyPosts componentDidUpdate()')
+        }*!/
+
+    shouldComponentUpdate(nextProps: Readonly<MyPostsPagePropsType>, nextState: Readonly<{}>, nextContext: any): boolean {
+        return nextProps !== this.props || nextState !== this.state
+    }
+
+    render() {
+        // @ts-ignore
+        window.props.push(this.props)
+        console.log('MyPosts render')
+        console.log('MyPosts props: ', this.props)
+        const postsElements = this.props.posts.map(post => <Post key={post.id}
+                                                                 id={post.id}
+                                                                 message={post.message}
+                                                                 likesCount={post.likesCount}/>)
+        const onAddPost = (values: FormDataType) => {
+            this.props.addPost(values.newPostText)
+        }
+
+        return <div className={classes.postsBlock}>
+            <h3>My posts</h3>
+            <AddNewPostFormRedux onSubmit={onAddPost}/>
+            <div className={classes.posts}>{postsElements}</div>
+        </div>
+    }
+}*/
