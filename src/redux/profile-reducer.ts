@@ -40,6 +40,9 @@ export const profileReducer = (state: InitialStateType = initialState, action: A
         case SET_STATUS: {
             return {...state, status: action.status}
         }
+        case 'DELETE_POST': {
+            return {...state, posts: state.posts.filter(post => post.id !== action.postId)}
+        }
         default:
             return state
     }
@@ -60,6 +63,11 @@ export const setStatus = (status: any) => ({
     status,
 } as const)
 
+
+export const deletePost = (postId: number) => ({
+    type: 'DELETE_POST',
+    postId,
+} as const)
 
 export const getUserProfile = (userId: string) => (dispatch: Dispatch) => {
     usersApi.getProfile(userId).then(response => {

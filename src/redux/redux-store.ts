@@ -1,5 +1,5 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux'
-import {addPostActionCreator, profileReducer, setStatus, setUserProfile} from './profile-reducer'
+import {addPostActionCreator, deletePost, profileReducer, setStatus, setUserProfile} from './profile-reducer'
 import {sidebarReducer} from './sidebar-reducer'
 import {
     followSuccess,
@@ -45,5 +45,6 @@ export type ActionsTypes =
     | ReturnType<typeof toggleFollowingProgress>
     | ReturnType<typeof setStatus>
     | ReturnType<typeof initializedSuccess>
+    | ReturnType<typeof deletePost>
 
 // store.getState().
