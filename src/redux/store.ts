@@ -104,6 +104,3 @@ const store: StoreType = {
         this._callSubscriber(this._state)
     },
 }
-
-// @ts-ignore
-window.store = store

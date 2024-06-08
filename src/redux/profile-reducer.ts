@@ -70,17 +70,17 @@ export const deletePost = (postId: number) => ({
 } as const)
 
 export const getUserProfile = (userId: string) => async (dispatch: Dispatch) => {
-    const response: any = usersApi.getProfile(userId)
+    const response: any = await usersApi.getProfile(userId)
     dispatch(setUserProfile(response.data))
 }
 
 export const getStatus = (status: any) => async (dispatch: Dispatch) => {
-    const response: any = profileApi.getStatus(status)
+    const response: any = await profileApi.getStatus(status)
     dispatch(setStatus(response.data))
 }
 
 export const updateStatus = (status: any) => async (dispatch: Dispatch) => {
-    const response: any = profileApi.updateStatus(status)
+    const response: any = await profileApi.updateStatus(status)
 
     if (response.data.resultCode === 0) {
         dispatch(setStatus(status))

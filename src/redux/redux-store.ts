@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore} from 'redux'
+import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import {addPostActionCreator, deletePost, profileReducer, setStatus, setUserProfile} from './profile-reducer'
 import {sidebarReducer} from './sidebar-reducer'
 import {
@@ -29,7 +29,16 @@ const reducers = combineReducers({
     app: appReducer,
 })
 
-export const store = createStore(reducers, applyMiddleware(thunk))
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose;
+    }
+}
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+export const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)))
+// @ts-ignore
+window.__store__ = store
 
 export type ActionsTypes =
     ReturnType<typeof addPostActionCreator>
