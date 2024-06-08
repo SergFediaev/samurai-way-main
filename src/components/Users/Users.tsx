@@ -7,7 +7,7 @@ export const Users = (props: any) => {
     return <div>
         <Paginator currentPage={props.currentPage}
                    onPageChanged={props.onPageChanged}
-                   totalUsersCount={props.totalUsersCount}
+                   totalItemsCount={props.totalItemsCount}
                    pageSize={props.pageSize}/>
         {props.users.map((user: UserType) => <User user={user}
                                                    followingInProgress={props.followingInProgress}
