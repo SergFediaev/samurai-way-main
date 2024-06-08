@@ -1,0 +1,1 @@
+export const updateObjectInArray = <T>(items: Array<T>, itemId: number, objectPropertyName: string, newObjectProperty: any): Array<T> => items.map((item: any) => item[objectPropertyName] === itemId ? {...item, ...newObjectProperty} : item)
