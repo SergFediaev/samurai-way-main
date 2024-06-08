@@ -1,6 +1,6 @@
 import React, {Component, ComponentType} from 'react'
 import './App.css'
-import {Route, withRouter} from 'react-router-dom'
+import {BrowserRouter, Route, withRouter} from 'react-router-dom'
 import {New} from './components/New/New'
 import {Music} from './components/Music/Music'
 import {Settings} from './components/Settings/Settings'
@@ -10,10 +10,10 @@ import ProfileContainer from './components/Profile/ProfileContainer'
 import HeaderContainer from './components/Header/HeaderContainer'
 import DialogsContainer from './components/Dialogs/DialogsContainer'
 import Login from './components/Login/Login'
-import {connect} from 'react-redux'
+import {connect, Provider} from 'react-redux'
 import {compose} from 'redux'
 import {initializeApp} from './redux/app-reducer'
-import {AppStoreType} from './redux/redux-store'
+import {AppStoreType, store} from './redux/redux-store'
 import {Preloader} from './components/common/Preloader/Preloader'
 
 // const ProfileComponent = () => <Profile/>
@@ -49,6 +49,14 @@ const mapStateToProps = (state: AppStoreType) => ({
     initialized: state.app.initialized,
 })
 
-export default compose<ComponentType>(
+const AppContainer = compose<ComponentType>(
     withRouter,
     connect(mapStateToProps, {initializeApp}))(App)
+
+export const SamuraiJsApp = () => {
+    return <BrowserRouter>
+        <Provider store={store}>
+            <AppContainer/>
+        </Provider>
+    </BrowserRouter>
+}
