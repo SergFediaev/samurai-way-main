@@ -9,7 +9,8 @@ export const Users = (props: any) => {
                    onPageChanged={props.onPageChanged}
                    totalItemsCount={props.totalItemsCount}
                    pageSize={props.pageSize}/>
-        {props.users.map((user: UserType) => <User user={user}
+        {props.users.map((user: UserType) => <User key={user.id}
+                                                   user={user}
                                                    followingInProgress={props.followingInProgress}
                                                    unfollow={props.unfollow}
                                                    follow={props.follow}/>)}
