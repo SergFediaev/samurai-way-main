@@ -1,7 +1,8 @@
 import {PostPropsType} from '../components/Profile/Posts/Post/Post'
-import {ActionsTypes} from './redux-store'
+import {ActionsTypes, AppStoreType} from './redux-store'
 import {Dispatch} from 'redux'
 import {profileApi, usersApi} from '../api/api'
+import {stopSubmit} from 'redux-form'
 
 export const ADD_POST = 'ADD-POST'
 const SET_USER_PROFILE = 'SET_USER_PROFILE'
@@ -98,5 +99,18 @@ export const savePhoto = (file: any) => async (dispatch: Dispatch) => {
 
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))
+    }
+}
+
+export const saveProfile = (profile: any) => async (dispatch: Dispatch, getState: () => AppStoreType) => {
+    const userId = getState().auth.userId
+    const response: any = await profileApi.saveProfile(profile)
+
+    if (response.data.resultCode === 0) {
+        // @ts-ignore
+        dispatch(getUserProfile(userId))
+    } else {
+        dispatch(stopSubmit('edit-profile', {_error: response.data.messages[0]}))
+        return Promise.reject(response.data.messages[0])
     }
 }

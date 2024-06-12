@@ -10,6 +10,7 @@ export const Profile = (props: any) => {
                      isOwner={props.isOwner}
                      profile={props.profile}
                      status={props.status}
+                     saveProfile={props.saveProfile}
                      updateStatus={props.updateStatus}/>
         <MyPostsContainer/>
     </div>
